@@ -2,17 +2,24 @@ from flask_restful import Resource
 from models.store import StoreModel
 
 
+NAME_ALREADY_EXISTS = "An item with name '{}' already exists."
+ERROR_INSERTING = "An error occurred while inserting the store."
+STORE_NOT_FOUND = "Store not found."
+STORE_DELETED = "Store deleted."
+
+
 class Store(Resource):
-    def get(self, name):
+    @classmethod
+    def get(cls, name):
         store = StoreModel.find_by_name(name)
         if store:
             return store.json()
-        return {"message": "Store not found."}, 404
+        return {"message": STORE_NOT_FOUND}, 404
 
-    def post(self, name):
+    def post(self, name: str):
         if StoreModel.find_by_name(name):
             return (
-                {"message": "A store with name '{}' already exists.".format(name)},
+                {"message": NAME_ALREADY_EXISTS.format(name)},
                 400,
             )
 
@@ -20,18 +27,20 @@ class Store(Resource):
         try:
             store.save_to_db()
         except:
-            return {"message": "An error occurred while creating the store."}, 500
+            return {"message": ERROR_INSERTING}, 500
 
         return store.json(), 201
 
-    def delete(self, name):
+    @classmethod
+    def delete(cls, name: str):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
 
-        return {"message": "Store deleted."}
+        return {"message": STORE_DELETED}
 
 
 class StoreList(Resource):
-    def get(self):
+    @classmethod
+    def get(cls):
         return {"stores": [x.json() for x in StoreModel.find_all()]}
