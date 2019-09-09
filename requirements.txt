@@ -1,3 +1,5 @@
+werkzeug
+requests
 marshmallow
 Flask
 Flask-JWT-Extended
