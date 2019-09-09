@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Confirmation</title>
+    <link href="{{ url_for('static', filename='confirmation_page.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center full-height">
+            <h1>Thank You</h1>
+            <p><em>Your registration has been confirmed through < {{ email }}>.</em></p>
+        </div>
+
+        <footer class="text-center">
+            <hr>
+            <p><a href="https://www.google.com/" target="_blank">Google</a></p>
+        </footer>
+    </div>
+</body>
+</html>
