@@ -106,3 +106,4 @@ venv.bak/
 # my file
 .idea/
 /data.db
+/static/images/
